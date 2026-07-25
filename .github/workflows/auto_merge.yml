@@ -1,0 +1,19 @@
+name: Auto Merge Exercism Bot PR
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge_pr:
+    runs-on: ubuntu-latest
+    # 仅匹配目标机器人的PR
+    if: github.event.pull_request.user.login == 'exercism-solutions-syncer[bot]'
+    steps:
+      - name: Direct merge PR
+        run: gh pr merge ${{ github.event.pull_request.number }} --merge --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.ADMIN_PAT }}
