@@ -1,0 +1,21 @@
+package raindrops
+
+import "strconv"
+
+func Convert(number int) string {
+	//panic("Please implement the Convert function")
+	var ans string
+    if number%3 == 0 {
+        ans += "Pling"
+    }
+    if number%5 == 0 {
+        ans += "Plang"
+    }
+    if number%7 == 0 {
+        ans += "Plong"
+    }
+    if ans == "" {
+        ans = strconv.Itoa(number) 
+    }
+    return ans
+}
